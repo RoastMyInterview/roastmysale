@@ -9,7 +9,7 @@ import {
   Timer, Gift, X, Info, HelpCircle, Volume2, VolumeX, Smile, Briefcase,
   Sparkles, Crown, BarChart3, Copy, Swords, MessageCircle, RefreshCw,
   Building2, Smartphone, Zap, ChevronDown, ChevronUp, FileWarning,
-  MessageSquare, Radio
+  MessageSquare, Radio, Tag, DollarSign
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { cn } from '@/lib/utils';
@@ -17,35 +17,32 @@ import { cn } from '@/lib/utils';
 const DICK_AVATAR = 'https://roastmyinterview.me/dick-avatar.jpg';
 
 const BALLOON_ROASTS = [
-  "I roast you in here so hiring managers don't ghost you out there!",
-  "Drop the buzzwords and tell me what you actually accomplished. Let's see it!",
-  "Recruiters send polite generic rejections. I give you the real feedback you need to win.",
-  "If you say 'synergy', you're fired. If you give me real numbers, you get hired.",
-  "Let's turn your corporate speak into an irresistible, metric-driven pitch!",
-  "You're better than a buzzword-stuffed resume. Step up and prove it to me.",
-  "Zero fluff. High energy. Let's see if you can pass the ultimate interview test!",
-  "Real confidence starts when fake corporate jargon stops. Show me what you've got!",
-  "I'm here to give you the honest feedback your former boss was too polite to say.",
-  "Drop the 'rockstar' title. Show me a real problem-solver who delivers results.",
-  "Most candidates talk for 4 minutes and say nothing. Let's practice saying everything in 2 crisp sentences.",
-  "Three questions between you and executive-grade interview confidence. Let's go!",
-  "You want that promotion? Stop speaking like a LinkedIn post and speak like a leader.",
-  "I push hard because the job market doesn't grade on a curve. Let's sharpen your pitch.",
-  "Every time you say 'think outside the box', a recruiter closes your resume. Let's fix that.",
-  "Tough love is the fastest shortcut to passing real executive interviews.",
-  "Don't practice until you get it right. Practice with me until you can't get it wrong!",
-  "Give me concrete metrics, clear accountability, and zero fluff. Let's do this!"
+  "I roast your listing in here so buyers stop lowballing and ghosting you out there!",
+  "Drop 'I know what I got' and tell me why anyone should pay your delusional asking price.",
+  "If your listing says 'serious inquiries only', you're fired. Give me real specs and transparent history.",
+  "Let's turn your dusty marketplace essay into an irresistible, high-converting offer!",
+  "You're better than blurry photos and a one-sentence description. Step up and sell.",
+  "Zero fluff. High conversion. Let's see if your offer can survive the hot seat!",
+  "Real buyers pay top dollar when delusional sales tactics stop. Show me the offer!",
+  "I'm here to give you the brutal pricing critique your friends were too polite to say.",
+  "Drop the 'my loss is your gain' cliché. Give me concrete value.",
+  "Most sellers write three paragraphs and say nothing. Let's close the deal in two crisp sentences.",
+  "Three questions between you and an offer that actually sells. Let's go!",
+  "You want cash in hand? Stop acting offended by market reality and defend your value.",
+  "Every time you write 'priced to sell fast', buyers smell desperation. Let's fix that.",
+  "Tough love is the fastest shortcut to an accepted offer.",
+  "Don't discount out of panic. Practice with me until nobody lowballs you!"
 ];
 
 const LIVE_CASUALTIES = [
-  "⚡ Someone at Google just got fired for using 'bandwidth' (12s ago)",
-  "🔥 Designer went from 12/100 to 88/100 after fixing their pitch (24s ago)",
-  "💀 Product Manager in Austin scored 4/100 for saying 'synergy' (28s ago)",
-  "🚀 Startup Founder scored 92/100 by actually explaining their metrics (35s ago)",
-  "🚨 Candidate terminated for claiming to be a '10x rockstar' (45s ago)",
-  "🔥 Engineer in NY jumped from 5/100 to 85/100 after Dick's feedback (1m ago)",
-  "⚡ Scrum Master in Seattle failed question 2 on basic accountability (1m ago)",
-  "🏆 Sales Lead hit 95/100 by keeping answers under 2 sentences (2m ago)"
+  "⚡ FB Marketplace seller failed for 'no lowballers I know what I got' (12s ago)",
+  "🔥 Used car listing jumped from 14/100 to 88/100 after adding service records (24s ago)",
+  "💀 SaaS founder scored 4/100 for hiding prices behind 'book a demo' (30s ago)",
+  "🚀 Vintage reseller hit 94/100 with flawless high-res defect shots (42s ago)",
+  "🚨 Listing terminated for claiming a 2008 sedan is a 'rare collector piece' (50s ago)",
+  "🔥 Freelance pitch jumped from 11/100 to 86/100 after Dick audited the deliverables (1m ago)",
+  "⚡ Craigslist listing failed question 2 on basic pricing transparency (1m ago)",
+  "🏆 High-ticket closer hit 96/100 with zero sales breath or pressure tactics (2m ago)"
 ];
 
 const BAD_WORDS_REGEX = /\b(fuck|shit|bitch|asshole|cunt|dickhead|pussy|whore|slut|faggot|nigg|cock|penis|vagina|bastard|twat)\b/i;
@@ -59,25 +56,25 @@ interface WallItem {
 }
 
 const INITIAL_WALL_OF_SHAME: WallItem[] = [
-  { name: 'Brad T.', role: 'Senior Product Lead', score: 14, verdict: 'Told him his 5-year roadmap belongs in a kindergarten art show.', timeAgo: '4m ago' },
-  { name: 'Sarah K.', role: 'VP of Marketing', score: 8, verdict: 'Fired in 45 seconds for saying "synergy" with a straight face.', timeAgo: '12m ago' },
-  { name: 'Devon M.', role: 'Full Stack Engineer', score: 27, verdict: 'Claimed to be a "10x rockstar". Turned out to be a 0.1x karaoke singer.', timeAgo: '28m ago' },
-  { name: 'Alex R.', role: 'Scrum Master', score: 19, verdict: 'Agile enthusiast who could not stand up to basic accounting questions.', timeAgo: '41m ago' },
-  { name: 'Taylor B.', role: 'Chief of Staff', score: 6, verdict: 'Gave a 4-minute non-answer. Dick fell asleep and woke up disgusted.', timeAgo: '1h ago' },
+  { name: 'Dave R.', role: '2012 Honda Civic Listing', score: 11, verdict: 'Wanted $14k for a rusted car with "minor dent". Fired in 30 seconds.', timeAgo: '4m ago' },
+  { name: 'Elena K.', role: 'Agency Service Retainer', score: 8, verdict: 'Bio said "synergistic brand architecture". Zero deliverables listed.', timeAgo: '15m ago' },
+  { name: 'Marcus P.', role: 'FB Marketplace Couch', score: 18, verdict: 'Wrote "pet-free home" while a dog visibly slept on the cushion in photo 3.', timeAgo: '29m ago' },
+  { name: 'Sarah T.', role: 'Vintage Watch Sale', score: 14, verdict: 'Claimed "rare museum grade" for a scratched piece with missing papers.', timeAgo: '45m ago' },
+  { name: 'Jason B.', role: 'SaaS Pitch Page', score: 6, verdict: 'Hidden pricing and a 6-step form just to find out what it costs.', timeAgo: '1h ago' },
 ];
 
 const INITIAL_HALL_OF_FAME: WallItem[] = [
-  { name: 'Elena V.', role: 'Staff Infrastructure Eng', score: 94, verdict: 'Refused to use Kubernetes for a static site. Rare sign of human intelligence.', timeAgo: '2h ago' },
-  { name: 'Marcus L.', role: 'Director of Product', score: 91, verdict: 'Answered a question in two crisp sentences instead of a corporate TED Talk.', timeAgo: '5h ago' },
-  { name: 'Chloe D.', role: 'Senior Analyst', score: 88, verdict: 'Called out my trick question. Disrespectful, but mathematically accurate.', timeAgo: '8h ago' },
+  { name: 'Chloe M.', role: 'Refurbished Audio Gear', score: 95, verdict: 'Macro shots of every flaw, clear testing proof, sold in 2 hours.', timeAgo: '2h ago' },
+  { name: 'Ryan D.', role: 'Freelance Copy Package', score: 92, verdict: 'Concrete ROI metrics, crystal clear guarantees, zero sleazy pressure.', timeAgo: '5h ago' },
+  { name: 'Tomas S.', role: 'Classic Truck Listing', score: 89, verdict: 'Detailed maintenance receipts and zero defensive attitude.', timeAgo: '8h ago' },
 ];
 
-const COMPANY_WARS = [
-  { name: 'Management Consultancies', avgScore: 11, players: '1,420 victims', verdict: 'Synergy overdose & zero concrete metrics.' },
-  { name: 'Seed-Stage Startups', avgScore: 15, players: '2,890 victims', verdict: 'Pre-revenue swagger, post-revenue panic.' },
-  { name: 'Big Tech / FAANG', avgScore: 24, players: '3,840 victims', verdict: 'Cannot answer simple questions without 12 acronyms.' },
-  { name: 'Growth Marketing Agencies', avgScore: 8, players: '1,730 victims', verdict: 'Called themselves "growth ninjas". Fired on question 1.' },
-  { name: 'Investment Banking', avgScore: 19, players: '960 victims', verdict: 'Total meltdown when asked what they actually build.' }
+const MARKET_WARS = [
+  { name: 'FB Marketplace Listings', avgScore: 11, players: '4,620 victims', verdict: '"No lowballers I know what I got" & blurry night photos.' },
+  { name: 'Used Car Sellers', avgScore: 15, players: '3,890 victims', verdict: 'Hiding transmission issues behind fresh air freshener.' },
+  { name: 'Agency Service Pitches', avgScore: 22, players: '2,840 victims', verdict: '5-figure monthly fees with zero transparent deliverables.' },
+  { name: 'Craigslist Bargain Posts', avgScore: 9, players: '1,930 victims', verdict: 'Defensive copy and demanding buyers bring exact cash.' },
+  { name: 'E-commerce Landing Pages', avgScore: 19, players: '1,160 victims', verdict: 'Hidden shipping fees and deceptive countdown timers.' }
 ];
 
 const MAX_FREE_ATTEMPTS = 1;
@@ -176,14 +173,14 @@ export default function Home() {
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       window.scrollTo(0, 0);
 
-      const defaultTitle = 'RoastMyInterview.me | Face Dick Headerson';
+      const defaultTitle = 'RoastMySale.me | Face Dick Headerson';
       const alertTitles = [
         "🔥 Don't chicken out now! ",
-        "👀 Hiring managers are watching... ",
-        "💀 Your resume is crying for help... ",
-        "💼 The hot seat is still warm... ",
-        "🚨 Corporate jargon detected... ",
-        "⏳ Your mock interview is waiting... "
+        "👀 Buyers are lowballing... ",
+        "💀 Your listing is collecting dust... ",
+        "🏷️ The hot seat is still warm... ",
+        "🚨 Delusional pricing detected... ",
+        "⏳ Your sales audit is waiting... "
       ];
       
       let scrollTimer: any = null;
@@ -214,7 +211,7 @@ export default function Home() {
       }
 
       if (challengerName) {
-        const roleVal = challengerRole || 'Product Manager';
+        const roleVal = challengerRole || 'Used Car Listing';
         const scoreVal = challengerScore ? (challengerScore.includes('/') ? challengerScore : `${challengerScore}/100`) : '14/100';
         const numScore = parseInt(scoreVal.replace(/[^0-9]/g, ''), 10) || 14;
         setChallengerInfo({
@@ -234,7 +231,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem('rmi_free_attempt_v2');
+    const saved = localStorage.getItem('rms_free_attempt_v2');
     if (saved) setFreeAttempts(parseInt(saved, 10) || 0);
   }, []);
 
@@ -272,7 +269,7 @@ export default function Home() {
     return text
       .replace(/[\*\#\_\~]/g, '')
       .replace(/https?:\/\/\S+/g, '')
-      .replace(/🚨|💀|🗣️|🚩|💡|🎖️|👑|📊|⚔️️|🏢|⚡|📱/g, '')
+      .replace(/🚨|💀|🗣|🚩|💡|🎖️️|👑|📊|⚔|🏢|⚡|📱|🏷️|💵/g, '')
       .trim();
   };
 
@@ -324,7 +321,7 @@ export default function Home() {
     if (window.speechSynthesis) window.speechSynthesis.cancel();
     if (!introPlayed) {
       setIntroPlayed(true);
-      speakText("Listen up. Real recruiters smile, say great job, and then ghost you. I give you the brutal, unfiltered reality check you actually need to get hired. Drop the corporate buzzwords, step into the hot seat, and let's see what you're made of.");
+      speakText("Listen up. Polite friends tell you your asking price is fair, and then your listing sits online for 6 months while real buyers scroll past. I give you the brutal pricing reality check you need to actually close the deal. Drop the defensive excuses, step into the hot seat, and let's see what you're selling.");
     } else {
       let nextIdx = 0;
       do {
@@ -391,9 +388,11 @@ export default function Home() {
     if (!hasScorecard) return null;
 
     const scoreMatch = fullText.match(/Final Score:?\*?\*?\s*([^\n\r]+)/i);
-    const decisionMatch = fullText.match(/Hiring Decision:?\*?\*?\s*([^\n\r]+)/i);
-    const autopsyMatch = fullText.match(/The Autopsy\*?\*?\s*([\s\S]*?)(?=###|🗣️|What You Said|🚩|Red Flags|$)/i);
-    const translationMatch = fullText.match(/(?:What You Said vs\.? What Dick Heard|What Dick actually heard)\*?\*?\s*([\s\S]*?)(?=###|🚩|Red Flags|💡|The Script Doctor|$)/i);
+    const decisionMatch = fullText.match(/(?:Hiring Decision|Verdict|Sales Verdict|Offer Decision):?\*?\*?\s*([^\n\r]+)/i);
+    const decisionText = decisionMatch ? decisionMatch[1].replace(/[\[\]]/g, '').trim() : 'UNSALEABLE DELUSION';
+
+    const autopsyMatch = fullText.match(/The Autopsy\*?\*?\s*([\s\S]*?)(?=###|🗣|What You Said|🚩|Red Flags|$)/i);
+    const translationMatch = fullText.match(/(?:What You Said vs\.? What Dick Heard|What Dick actually heard|What Buyers Actually Read)\*?\*?\s*([\s\S]*?)(?=###|🚩|Red Flags|💡|The Script Doctor|$)/i);
     const redFlagsMatch = fullText.match(/Red Flags Identified\*?\*?\s*([\s\S]*?)(?=###|💡|The Script Doctor|---|Official Evaluation|$)/i);
     const scriptDoctorMatch = fullText.match(/The Script Doctor[^\n]*\*?\*?\s*([\s\S]*?)(?=---|Official Evaluation|$)/i);
 
@@ -407,7 +406,7 @@ export default function Home() {
       introRoast,
       finalScore: extractedScoreStr,
       numericScore,
-      decision: decisionMatch ? decisionMatch[1].replace(/[\[\]]/g, '').trim() : 'NEEDS SHARPENING',
+      decision: decisionText,
       autopsy: autopsyMatch ? autopsyMatch[1].trim() : '',
       translation: translationMatch ? translationMatch[1].trim() : '',
       redFlags: redFlagsMatch ? redFlagsMatch[1].trim() : '',
@@ -435,11 +434,11 @@ export default function Home() {
     if (isInterviewOver && userName && jobTitle) {
       const newScore = autoFailed ? 0 : Math.floor(Math.random() * 25) + 5;
       const newVerdict = autoFailed
-        ? 'Instant termination for illegal buzzword deployment.'
-        : 'Dick gave them an honest reality check to fix their pitch.';
+        ? 'Instant sale cancellation for deploying defensive seller clichés.'
+        : 'Dick gave them an honest reality check on their price and pitch.';
 
       setWallFeed((prev) => [
-        { name: userName, role: jobTitle + (companyName ? ` @ ${companyName}` : ''), score: newScore, verdict: newVerdict, timeAgo: 'Just now' },
+        { name: userName, role: jobTitle + (companyName ? ` (${companyName})` : ''), score: newScore, verdict: newVerdict, timeAgo: 'Just now' },
         ...prev.slice(0, 5),
       ]);
     }
@@ -463,12 +462,12 @@ export default function Home() {
     const vipActive = forceVip || isVipMode;
 
     if (!jobTitle.trim() || !userName.trim()) {
-      alert('Please enter your name and target job title first!');
+      alert('Please enter your name and what you are selling first!');
       return;
     }
 
     if (BAD_WORDS_REGEX.test(userName.toLowerCase())) {
-      alert("Let's keep it professional. Please use an appropriate name or nickname.");
+      alert("Let's keep it clean. Please use an appropriate name or seller handle.");
       return;
     }
 
@@ -480,33 +479,33 @@ export default function Home() {
     if (!vipActive) {
       const nextCount = freeAttempts + 1;
       setFreeAttempts(nextCount);
-      localStorage.setItem('rmi_free_attempt_v2', nextCount.toString());
+      localStorage.setItem('rms_free_attempt_v2', nextCount.toString());
     }
 
     setStarted(true);
     const randomRejections = Math.floor(Math.random() * (1000000 - 10 + 1) + 10).toLocaleString();
 
     const challengerContext = challengerInfo
-      ? ` My rival ${challengerInfo.name} challenged me after scoring ${challengerInfo.score} for ${challengerInfo.role}. Call out that I am here to beat ${challengerInfo.name}'s score.`
+      ? ` My rival ${challengerInfo.name} challenged me after scoring ${challengerInfo.score} for their sale of ${challengerInfo.role}. Call out that I am here to beat ${challengerInfo.name}'s score.`
       : '';
 
     const bioContext = linkedinBio.trim()
-      ? ` My current public headline/bio is: "${linkedinBio.trim()}". In your very first sentence, savage and roast this headline before asking Question 1.`
+      ? ` My current listing copy / asking price is: "${linkedinBio.trim()}". In your very first sentence, savage and roast this pricing and pitch before asking Question 1.`
       : '';
 
     const companyContext = companyName.trim()
-      ? ` I currently work at or represent: "${companyName.trim()}". Hold me accountable to that company's reputation.`
+      ? ` Target platform or marketplace: "${companyName.trim()}". Hold me accountable to buyers on that platform.`
       : '';
 
     if (vipActive) {
       append({
         role: 'user',
-        content: `My name is ${userName.trim()} and my target role is: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love senior executive hiring manager. You ask exactly 13 brutal questions total (The Unlucky 13 Gauntlet), one at a time.\n\nDELIVERABLE MILESTONES:\n- At Question 4 (after answer 4): In your response, provide '### 📊 Milestone Report #1 (Pacing & Fluff Audit)', then immediately ask Question 5.\n- At Question 8 (after answer 8): In your response, provide '### 📊 Milestone Report #2 (Substance vs Jargon Ratio)', then immediately ask Question 9.\n- After answer 13: Do NOT ask another question; provide Dick Headerson's Official Scorecard.\n\nIntroduce yourself now, address me by name, state you've rejected ${randomRejections} applicants, dare me to survive the Unlucky 13 questions with checkpoints at Q4 and Q8, and ask Question 1.`,
+        content: `My name is ${userName.trim()} and I am selling: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love sales closer, appraiser, and marketplace auditor. You shred delusional pricing, hidden defects, defensive seller attitudes, and sleazy pitch copy. You ask exactly 13 brutal questions total (The Unlucky 13 Gauntlet), one at a time.\n\nDELIVERABLE MILESTONES:\n- At Question 4 (after answer 4): In your response, provide '### 📊 Milestone Report #1 (Delusional Pricing & Defect Audit)', then immediately ask Question 5.\n- At Question 8 (after answer 8): In your response, provide '### 📊 Milestone Report #2 (Buyer Friction & Conversion Audit)', then immediately ask Question 9.\n- After answer 13: Do NOT ask another question; provide Dick Headerson's Official Scorecard.\n\nIntroduce yourself now, address me by name, state you've lowballed or passed on ${randomRejections} overpriced listings, dare me to survive the Unlucky 13 questions with checkpoints at Q4 and Q8, and ask Question 1.`,
       });
     } else {
       append({
         role: 'user',
-        content: `My name is ${userName.trim()} and my target role is: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love senior executive hiring manager. You hate buzzwords, corporate jargon, and vague answers. You ask exactly 3 brutal questions total, one at a time. After my answer to question 3, do not ask another question; provide Dick Headerson's Official Scorecard with actionable constructive advice. Introduce yourself now, address me by name, set a high-energy tough-love tone, and ask Question 1.`,
+        content: `My name is ${userName.trim()} and I am selling: ${jobTitle.trim()}.${companyContext}${bioContext}${challengerContext} You are Dick Headerson, a tough-love sales closer, appraiser, and marketplace auditor. You hate delusional pricing, defensive seller clichés, hidden flaws, and vague sales copy. You ask exactly 3 brutal questions total, one at a time. After my answer to question 3, do not ask another question; provide Dick Headerson's Official Scorecard with actionable constructive advice on how to price and position this to actually sell. Introduce yourself now, address me by name, set a high-energy tough-love tone, and ask Question 1.`,
       });
     }
   };
@@ -552,10 +551,9 @@ export default function Home() {
     textarea.style.height = 'auto';
 
     const triggerWords = [
-      'synergy', 'rockstar', 'ninja', 'think outside the box', 'disrupt',
-      'thought leader', 'circle back', 'deep dive', 'dive deep', 'diving deep',
-      'move the needle', 'bandwidth', 'low-hanging fruit', 'touch base', 'paradigm shift',
-      'hyper-growth', 'holistic approach', 'wheelhouse'
+      'i know what i got', 'no lowballers', 'serious inquiries only', 'my loss your gain',
+      'priced to sell fast', 'firm on price', 'rare find', 'mint condition',
+      'don\'t waste my time', 'must see to appreciate', 'priced accordingly', 'steals and deals'
     ];
     const lowerValue = value.toLowerCase();
     const hitBuzzword = triggerWords.find((word) => lowerValue.includes(word));
@@ -570,7 +568,7 @@ export default function Home() {
       setTimeout(() => {
         append({
           role: 'assistant',
-          content: `🚨 **BUZZWORD TRIGGERED: EMERGENCY TERMINATION** 🚨\n\nDid you just say *"${hitBuzzword}"* with a straight face? \n\nI stop interviews dead in their tracks because real recruiters will silently toss your application in the trash the second they hear consultant jargon. You have genuine experience, ${userName}—stop hiding behind empty buzzwords.\n\n### Dick Headerson's Official Scorecard\n* **Final Score:** 0/100\n* **Hiring Decision:** INSTANT TERMINATION\n* **Fatal Error:** Deployed the illegal corporate buzzword "${hitBuzzword}".\n* **The Autopsy:** Candidate resorted to corporate autopilot rather than answering with concrete, measurable outcomes.\n* **The Fix:** Delete every generic corporate phrase from your memory. Speak plainly, give numbers, and try again!`,
+          content: `🚨 **SELLER CLICHÉ TRIGGERED: EMERGENCY SALE CANCELLATION** 🚨\n\nDid you just tell me *"${hitBuzzword}"* with a straight face? \n\nI stop audits dead in their tracks because buyers instantly close tabs the microsecond they smell defensive seller arrogance. You're trying to move an item, ${userName}—stop acting like a defensive hostage negotiator.\n\n### Dick Headerson's Official Scorecard\n* **Final Score:** 0/100\n* **Sales Verdict:** UNSALEABLE DELUSION\n* **Fatal Error:** Deployed the defensive seller cliché "${hitBuzzword}".\n* **The Autopsy:** Seller resorted to defensive emotional posturing instead of proving tangible value and condition.\n* **The Fix:** Delete every combative warning from your listing. Price realistically, disclose flaws openly, and try again!`,
         });
       }, 500);
       return;
@@ -611,42 +609,39 @@ export default function Home() {
     if (!certificateRef.current) return;
     try {
       const html2canvas = (await import('html2canvas')).default;
-      const canvas = await html2canvas(certificateRef.current, {
-        backgroundColor: '#09090b',
-        scale: 2.5,
-      });
+      const canvas = await html2canvas(certificateRef.current, { backgroundColor: '#09090b', scale: 2.5 });
       canvas.toBlob(async (blob) => {
         if (!blob) return;
         try {
           await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
-          alert('Badge copied to clipboard! Paste directly into Slack, Discord, or WhatsApp (Ctrl+V / Cmd+V).');
+          alert('Badge copied to clipboard! Paste directly into messages, group chat, or Slack (Ctrl+V / Cmd+V).');
         } catch {
           linkDownload(canvas.toDataURL('image/png'));
         }
       });
     } catch {
-      alert('Failed to copy. Use Save Image instead!');
+      alert('Failed to copy. Use Save File instead!');
     }
   };
 
   const shareUrl = useMemo(() => {
-    if (typeof window === 'undefined') return 'https://roastmyinterview.me';
+    if (typeof window === 'undefined') return 'https://roastmysale.me';
     if (userName && parsedScorecard?.finalScore) {
       const cleanScore = parsedScorecard.finalScore.replace(/[^0-9\/]/g, '');
-      return `https://roastmyinterview.me?challenger=${encodeURIComponent(userName)}&score=${encodeURIComponent(cleanScore)}&role=${encodeURIComponent(jobTitle || 'Candidate')}`;
+      return `https://roastmysale.me?challenger=${encodeURIComponent(userName)}&score=${encodeURIComponent(cleanScore)}&role=${encodeURIComponent(jobTitle || 'Listing')}`;
     }
-    return 'https://roastmyinterview.me';
+    return 'https://roastmysale.me';
   }, [userName, parsedScorecard, jobTitle]);
 
   const handleNativeShare = async () => {
     const shareTextContent = parsedScorecard?.finalScore
       ? headToHeadResult
-        ? `I took ${headToHeadResult.challengerName}'s interview challenge on RoastMyInterview.me! They scored ${headToHeadResult.rivalScore}, I scored ${headToHeadResult.userScore}. Think you can beat us?`
-        : `I just faced Dick Headerson for a ${jobTitle || 'job'} interview and scored ${parsedScorecard.finalScore}. Can you survive the hot seat?`
-      : `Think you can survive a mock interview with Dick Headerson without corporate buzzwords? Step into the hot seat:`;
+        ? `I took ${headToHeadResult.challengerName}'s sale audit challenge on RoastMySale.me! They scored ${headToHeadResult.rivalScore}, I scored ${headToHeadResult.userScore}. Think you can beat us?`
+        : `I just faced Dick Headerson for my ${jobTitle || 'item'} sale audit and scored ${parsedScorecard.finalScore}. Can your listing survive?`
+      : `Think your sale listing or pricing can survive Dick Headerson without getting roasted? Step into the hot seat:`;
 
     const shareData = {
-      title: 'RoastMyInterview.me | Face Dick Headerson',
+      title: 'RoastMySale.me | Face Dick Headerson',
       text: shareTextContent,
       url: shareUrl,
     };
@@ -655,7 +650,7 @@ export default function Home() {
       try { await navigator.share(shareData); } catch {}
     } else {
       navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-      alert('Challenge link copied to clipboard! Send to your colleagues or group chat.');
+      alert('Challenge link copied to clipboard! Send to your friends or group chat.');
     }
   };
 
@@ -663,37 +658,37 @@ export default function Home() {
     if (!headToHeadResult) return;
     const { challengerName, userScore, rivalScore, won, tied } = headToHeadResult;
     let message = won
-      ? `Hey ${challengerName}! I accepted your challenge on RoastMyInterview.me. You scored ${rivalScore}/100, but I crushed you with ${userScore}/100! 🏆 Try to beat me: ${shareUrl}`
+      ? `Hey ${challengerName}! I accepted your challenge on RoastMySale.me. You scored ${rivalScore}/100, but I crushed you with ${userScore}/100! 🏆 Try to beat me: ${shareUrl}`
       : tied
-        ? `Hey ${challengerName}! We tied with ${userScore}/100 on RoastMyInterview.me. Rematch now: ${shareUrl}`
-        : `Hey ${challengerName}! You beat me with ${rivalScore}/100 to my ${userScore}/100 on RoastMyInterview.me. Coming back for revenge: ${shareUrl}`;
+        ? `Hey ${challengerName}! We tied with ${userScore}/100 on RoastMySale.me. Rematch now: ${shareUrl}`
+        : `Hey ${challengerName}! You beat me with ${rivalScore}/100 to my ${userScore}/100 on RoastMySale.me. Coming back for revenge: ${shareUrl}`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const shareText = autoFailed
-    ? `I instantly failed an AI job interview because I slipped and used a corporate buzzword. See how fast you get caught:`
+    ? `I instantly failed an AI sales audit because I slipped and used a defensive seller cliché. See how fast you get caught:`
     : headToHeadResult
       ? `I faced Dick Headerson after ${headToHeadResult.challengerName} challenged me. I scored ${headToHeadResult.userScore}/100 vs ${headToHeadResult.rivalScore}/100. Can you beat me?`
-      : `I just faced tough-love executive Dick Headerson for a ${jobTitle || 'job'} interview. Can you beat my score?`;
+      : `I just faced tough-love sales auditor Dick Headerson for my ${jobTitle || 'sale'}. Can you beat my score?`;
 
   const handleWallShare = (platform: string) => {
-    const scoreText = autoFailed ? '0/100 (Instant Buzzword Failure)' : (parsedScorecard?.finalScore || '14/100');
-    const decisionText = autoFailed ? 'INSTANT TERMINATION' : (parsedScorecard?.decision || 'NEEDS SHARPENING');
-    const candidateRole = jobTitle.trim() || 'Candidate';
-    const companyTag = companyName.trim() ? ` representing ${companyName.trim()}` : '';
+    const scoreText = autoFailed ? '0/100 (Instant Cliché Failure)' : (parsedScorecard?.finalScore || '14/100');
+    const decisionText = autoFailed ? 'UNSALEABLE DELUSION' : (parsedScorecard?.decision || 'NEEDS RADICAL REPRICE');
+    const candidateRole = jobTitle.trim() || 'Item';
+    const companyTag = companyName.trim() ? ` on ${companyName.trim()}` : '';
 
     if (platform === 'slack') {
-      const slackSnippet = `:rotating_light: *${userName || 'A colleague'} just survived the hot seat with Dick Headerson!*\n• *Target Role:* ${candidateRole}\n• *Score:* ${scoreText}\n• *Verdict:* ${decisionText}\n• *Offense:* Banned from using empty corporate jargon.\n\nThink anyone on this team has thicker skin? Step up to the hot seat: ${shareUrl}`;
+      const slackSnippet = `:rotating_light: *${userName || 'A seller'} just survived the hot seat with Dick Headerson on RoastMySale!*\n• *Item / Offer:* ${candidateRole}\n• *Score:* ${scoreText}\n• *Verdict:* ${decisionText}\n• *Offense:* Banned from using "no lowballers I know what I got".\n\nThink you can price realistically and defend your pitch? Step up to the hot seat: ${shareUrl}`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(slackSnippet);
-        alert('📋 Pre-formatted Slack / Teams message copied to clipboard!\n\nJust paste (Ctrl+V / Cmd+V) into your team’s #watercooler, #random, or group chat.');
+        alert('📋 Pre-formatted message copied to clipboard!\n\nPaste into Slack or your group chat.');
       }
     }
     else if (platform === 'facebook') {
-      const fbPostText = `Dick Headerson just roasted my mock interview for ${candidateRole} with a ${scoreText}.\n\nTagging every colleague who says 'synergy', 'bandwidth', or 'circle back' in meetings: step up to the hot seat and see if you can beat my score: ${shareUrl}`;
+      const fbPostText = `Dick Headerson just roasted my ${candidateRole} listing with a ${scoreText}.\n\nTagging every friend trying to sell their stuff online: step up to the hot seat and see if you can beat my score: ${shareUrl}`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(fbPostText);
-        alert('🔥 Facebook Call-Out caption copied to clipboard!\n\nOpening Facebook now—paste it into your post and tag your coworkers!');
+        alert('🔥 Call-Out caption copied to clipboard!\n\nOpening Facebook now!');
       }
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
     }
@@ -701,10 +696,10 @@ export default function Home() {
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
     }
     else if (platform === 'linkedin') {
-      const linkedInPostText = `Humbled to announce that I just survived the mock interview hot seat with Dick Headerson for ${candidateRole}${companyTag} on RoastMyInterview.me.\n\n📊 Final Score: ${scoreText}\n🚨 Hiring Verdict: ${decisionText}\n\nDick's tough-love rule: zero consultant jargon, zero generic corporate fluff, only real metrics. Slip and say 'synergy' or 'deep dive', and you get terminated on the spot.\n\nThink you can beat my score without hiding behind buzzwords? Step up:\n${shareUrl}`;
+      const linkedInPostText = `Humbled to announce that I just survived the sales audit hot seat with Dick Headerson for my ${candidateRole}${companyTag} on RoastMySale.me.\n\n📊 Final Score: ${scoreText}\n🚨 Verdict: ${decisionText}\n\nDick's tough-love rule: zero defensive clichés, zero hidden flaws, transparent pricing. Slip and say 'serious inquiries only', and you get terminated on the spot.\n\nThink you have a real offer? Step up:\n${shareUrl}`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(linkedInPostText);
-        alert('🔥 Humble-Roast post copied to clipboard!\n\nOpening LinkedIn composer—simply hit Paste (Ctrl+V / Cmd+V).');
+        alert('🔥 Post copied to clipboard!\n\nOpening LinkedIn composer—simply hit Paste.');
       }
       window.open('https://www.linkedin.com/feed/?shareActive=true', '_blank');
     }
@@ -713,10 +708,10 @@ export default function Home() {
       else window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`, '_blank');
     }
     else if (platform === 'instagram') {
-      const igCaption = `Dick Headerson just roasted my mock interview for ${candidateRole} with a ${scoreText}. Hiring Verdict: ${decisionText}.\n\nThink you can survive without using consultant buzzwords? Link in bio or visit roastmyinterview.me\n\n#RoastMyInterview #DickHeaderson #CorporateHumor #JobSearch #MockInterview`;
+      const igCaption = `Dick Headerson just roasted my ${candidateRole} sale with a ${scoreText}. Verdict: ${decisionText}.\n\nThink your pricing will survive? Link in bio or visit roastmysale.me\n\n#RoastMySale #DickHeaderson #MarketplaceRoast #DelusionalPricing #FBMarketplace`;
       if (typeof navigator !== 'undefined' && navigator.clipboard) {
         navigator.clipboard.writeText(igCaption);
-        alert('📸 Instagram Caption Copied!\n\n💡 PRO TIP: Save your 9:16 Pink Slip below and post to IG Stories with an "Add Yours" sticker titled "Your worst interview score" to trigger a chain reaction!');
+        alert('📸 Instagram Caption Copied!');
       }
     }
   };
@@ -724,9 +719,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen w-full bg-zinc-950 text-zinc-100">
       
-      {/* =============================== */}
-      {/* CINEMATIC 8-SECOND INTRO LAYER  */}
-      {/* =============================== */}
+      {/* CINEMATIC 8-SECOND INTRO LAYER */}
       <style dangerouslySetInnerHTML={{ __html: `
         .intro-layer { position: fixed; inset: 0; background-color: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; pointer-events: none; overflow: hidden; animation: fadeOutIntro 1.5s forwards; animation-delay: 8s; }
         .chair-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(20%) contrast(120%); z-index: 1; }
@@ -751,7 +744,7 @@ export default function Home() {
       <div className="intro-layer">
         <div className="neon-box">
           <div className="neon-text">
-            <span className="neon-cyan">ROASTMYINTERVIEW</span><span className="neon-orange">.ME</span>
+            <span className="neon-cyan">ROASTMYSALE</span><span className="neon-orange">.ME</span>
           </div>
         </div>
         <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?q=80&w=1200&auto=format&fit=crop" alt="Comfy leather hot seat" className="chair-bg" />
@@ -760,21 +753,19 @@ export default function Home() {
 
       <div className="main-content flex flex-col w-full h-full">
 
-        {/* BUZZWORD FLASH OVERLAY */}
         {buzzwordFlashing && (
           <div className="fixed inset-0 z-[200] pointer-events-none bg-red-600/40 animate-pulse border-8 border-red-500" />
         )}
 
-        {/* CODE ACCEPTED POPUP */}
         {vipSuccess && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in">
             <div className="relative w-full max-w-sm rounded-3xl border border-emerald-500/50 bg-zinc-900 p-6 shadow-2xl text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 border-2 border-emerald-500/50">
-                <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+                <CheckCircle2 className="h-8 w-8 text-emerald-400"/>
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-white mb-2">Code Accepted!</h3>
               <p className="text-xs sm:text-sm text-zinc-300 mb-6 leading-relaxed">
-                VIP 13-Question Gauntlet unlocked. Enter your name and job title below to begin.
+                VIP 13-Question Sales Gauntlet unlocked. Enter your seller info below to begin.
               </p>
               <button
                 onClick={() => {
@@ -794,19 +785,18 @@ export default function Home() {
           </div>
         )}
 
-        {/* LIMIT MODAL */}
         {showLimitModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
             <div className="relative w-full max-w-md rounded-3xl border border-amber-500/60 bg-zinc-900 p-6 shadow-2xl text-left">
               <button onClick={() => setShowLimitModal(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-white">
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5"/>
               </button>
               <div className="flex items-center gap-2 mb-3">
-                <Crown className="h-6 w-6 text-amber-400" />
-                <h3 className="text-lg sm:text-xl font-black text-white">Free Interview Completed!</h3>
+                <Crown className="h-6 w-6 text-amber-400"/>
+                <h3 className="text-lg sm:text-xl font-black text-white">Free Sales Audit Completed!</h3>
               </div>
               <p className="text-xs sm:text-sm text-zinc-300 mb-5 leading-relaxed">
-                You&apos;ve completed your free mock roast. Upgrade to the <strong>Unlucky 13 Gauntlet</strong> with <strong>2 milestone reports</strong> (Q4 &amp; Q8) for $10 USD. Includes 8 individual free VIP invite passes!
+                You&apos;ve completed your free sales roast. Upgrade to the <strong>Unlucky 13 Gauntlet</strong> with <strong>2 milestone reports</strong> (Q4 &amp; Q8) for $10 USD. Includes 8 individual free VIP invite passes!
               </p>
               <div className="space-y-2.5">
                 <a
@@ -815,7 +805,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 py-3 text-xs sm:text-sm font-black text-black hover:from-amber-400 hover:to-orange-400 transition shadow-lg shadow-amber-500/20"
                 >
-                  <Crown className="h-4 w-4" />
+                  <Crown className="h-4 w-4"/>
                   <span>Get VIP Pass + 8 Free Invites ($10 USD)</span>
                 </a>
                 <button
@@ -827,14 +817,14 @@ export default function Home() {
                 <div className="pt-2 text-center border-t border-zinc-800 mt-3">
                   <button
                     onClick={() => {
-                      localStorage.removeItem('rmi_free_attempt_v2');
+                      localStorage.removeItem('rms_free_attempt_v2');
                       setFreeAttempts(0);
                       setShowLimitModal(false);
-                      alert('Free attempt reset! You can now start the interview.');
+                      alert('Free attempt reset! You can now start the audit.');
                     }}
                     className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-500 hover:text-orange-400 transition underline underline-offset-4"
                   >
-                    <RefreshCw className="h-3 w-3" />
+                    <RefreshCw className="h-3 w-3"/>
                     <span>Reset Free Attempt (Tester Mode)</span>
                   </button>
                 </div>
@@ -843,37 +833,35 @@ export default function Home() {
           </div>
         )}
 
-        {/* WHY MODAL */}
         {showWhyModal && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
             <div className="relative w-full max-w-md rounded-3xl border border-zinc-700 bg-zinc-900 p-6 shadow-2xl text-left">
               <button onClick={() => setShowWhyModal(false)} className="absolute top-4 right-4 text-zinc-500 hover:text-white">
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5"/>
               </button>
               <h3 className="text-lg sm:text-xl font-black text-white mb-4 flex items-center gap-2">
-                <HelpCircle className="h-6 w-6 text-amber-500" /> 
-                Why Use RoastMyInterview.me?
+                <HelpCircle className="h-6 w-6 text-amber-500"/> 
+                Why Use RoastMySale.me?
               </h3>
               <div className="space-y-4 text-xs sm:text-sm text-zinc-300">
-                <p><strong className="text-white">1. Real recruiters lie to you.</strong><br/>They send automated polite rejections. Dick explains where your pitch actually failed.</p>
-                <p><strong className="text-white">2. Kill buzzwords permanently.</strong><br/>Corporate jargon triggers immediate emergency termination.</p>
-                <p><strong className="text-white">3. Build unflappable composure.</strong><br/>If you survive Dick, talking to a real executive interviewer feels easy.</p>
+                <p><strong className="text-white">1. Friends lie to you.</strong><br/>They say your price is fair, but your item collects dust for 4 months.</p>
+                <p><strong className="text-white">2. Kill defensive seller clichés.</strong><br/>"No lowballers I know what I got" scares away real paying customers.</p>
+                <p><strong className="text-white">3. Get cash in hand.</strong><br/>Turn defensive marketplace essays into irresistible offers that close.</p>
               </div>
               <button onClick={() => setShowWhyModal(false)} className="mt-6 w-full rounded-xl bg-zinc-100 py-3 text-xs sm:text-sm font-bold text-black hover:bg-white transition-all shadow-lg">
-                I&apos;m ready to level up
+                I&apos;m ready to sell
               </button>
             </div>
           </div>
         )}
 
-        {/* FLOATING PROMO BALLOON */}
         {showBalloon && !started && (
           <div className="hidden sm:block fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-8 w-[calc(100vw-2rem)] max-w-xs sm:max-w-sm rounded-2xl border border-amber-500/50 bg-zinc-900/95 p-4 shadow-2xl shadow-amber-500/20 backdrop-blur">
             <button onClick={() => setShowBalloon(false)} className="absolute top-3 right-3 text-zinc-500 hover:text-white">
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4"/>
             </button>
             <div className="flex items-center gap-2 mb-1.5">
-              <Crown className="h-4 w-4 text-amber-500" />
+              <Crown className="h-4 w-4 text-amber-500"/>
               <span className="text-[11px] font-black tracking-wider uppercase text-amber-400">VIP Gauntlet Bundle</span>
             </div>
             <p className="text-xs text-zinc-200 leading-relaxed mb-2.5">
@@ -890,22 +878,16 @@ export default function Home() {
           </div>
         )}
 
-        {/* ONBOARDING HERO SCREEN */}
         {!started ? (
           <div className="min-h-screen w-full px-3 sm:px-6 pb-12 flex flex-col items-center justify-start">
-            
-            {/* Top Navigation Controls */}
             <div className="w-full flex justify-center py-2.5 mb-3 border-b border-zinc-800/70">
               <div className="w-full max-w-xl flex items-center justify-between gap-1.5 sm:gap-2 px-1">
-                
-                {/* BRANDING HUB LINK */}
                 <a href="https://roastmy.me" className="flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-amber-400 hover:border-amber-500/40 hover:bg-amber-500/20 transition-all">
-                  <ChevronLeft className="h-3.5 w-3.5" />
+                  <ChevronLeft className="h-3.5 w-3.5"/>
                   <span className="hidden sm:inline">RoastMy.me Hub</span>
                   <span className="inline sm:hidden">Hub</span>
                 </a>
 
-                {/* RIGHT CONTROLS */}
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <button
                     onClick={toggleVoice}
@@ -916,13 +898,13 @@ export default function Home() {
                         : "border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:bg-zinc-800 hover:text-white"
                     )}
                   >
-                    {voiceEnabled ? <Volume2 className="h-3.5 w-3.5 text-emerald-400" /> : <VolumeX className="h-3.5 w-3.5 text-zinc-500" />}
+                    {voiceEnabled ? <Volume2 className="h-3.5 w-3.5 text-emerald-400"/> : <VolumeX className="h-3.5 w-3.5 text-zinc-500"/>}
                     <span className="hidden sm:inline">{voiceEnabled ? 'Voice On' : 'Voice Off'}</span>
                   </button>
 
                   {isVipMode ? (
                     <div className="flex items-center gap-1 rounded-full border border-amber-500/50 bg-amber-500/20 px-2.5 py-1.5 text-xs font-bold text-amber-300">
-                      <Crown className="h-3.5 w-3.5 text-amber-400" />
+                      <Crown className="h-3.5 w-3.5 text-amber-400"/>
                       <span>VIP (13-Q)</span>
                     </div>
                   ) : (
@@ -932,7 +914,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-2.5 sm:px-3.5 py-1.5 text-xs font-bold text-amber-400 backdrop-blur transition-all hover:border-amber-400 hover:bg-amber-500/20"
                     >
-                      <Crown className="h-3.5 w-3.5" />
+                      <Crown className="h-3.5 w-3.5"/>
                       <span className="hidden sm:inline">VIP 13-Q + 8 Friends ($10 USD)</span>
                       <span className="inline sm:hidden">VIP ($10)</span>
                     </a>
@@ -942,8 +924,8 @@ export default function Home() {
                     onClick={handleNativeShare}
                     className="flex items-center gap-1.5 rounded-full border border-orange-500/50 bg-gradient-to-r from-orange-500/20 to-red-500/20 px-2.5 sm:px-3.5 py-1.5 text-xs font-bold text-orange-300 backdrop-blur transition-all hover:border-orange-400 hover:text-white shadow-sm shadow-orange-500/20"
                   >
-                    <Swords className="h-3.5 w-3.5 text-orange-400" />
-                    <span className="hidden sm:inline">Challenge a Friend</span>
+                    <Swords className="h-3.5 w-3.5 text-orange-400"/>
+                    <span className="hidden sm:inline">Challenge a Seller</span>
                     <span className="inline sm:hidden">Challenge</span>
                   </button>
                 </div>
@@ -951,31 +933,28 @@ export default function Home() {
             </div>
 
             <div className="w-full max-w-xl text-center">
-              
-              {/* LIVE CASUALTY TICKER */}
               <div className="w-full rounded-full border border-red-500/30 bg-red-950/30 px-3 py-1.5 flex items-center justify-center gap-2 text-[11px] text-zinc-300 mb-4 animate-in fade-in">
-                <Radio className="h-3.5 w-3.5 text-red-500 animate-pulse flex-shrink-0" />
+                <Radio className="h-3.5 w-3.5 text-red-500 animate-pulse flex-shrink-0"/>
                 <span className="truncate">{LIVE_CASUALTIES[casualtyIndex]}</span>
               </div>
 
               {challengerInfo && (
                 <div className="w-full rounded-2xl border-2 border-amber-500/90 bg-gradient-to-r from-amber-950/80 via-zinc-900/95 to-orange-950/80 p-3.5 text-center shadow-2xl shadow-orange-500/25 animate-in slide-in-from-top-4 mb-4">
                   <div className="flex items-center justify-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-400 mb-1">
-                    <Swords className="h-4 w-4 text-amber-400 animate-pulse" />
+                    <Swords className="h-4 w-4 text-amber-400 animate-pulse"/>
                     <span>{challengerInfo.name.toUpperCase()} HAS CHALLENGED YOU!</span>
                   </div>
                   <p className="text-sm sm:text-base font-extrabold text-white">
                     <strong className="text-orange-400">{challengerInfo.name}</strong> scored{' '}
-                    <strong className="text-amber-300 font-black text-lg">{challengerInfo.score}</strong> for{' '}
+                    <strong className="text-amber-300 font-black text-lg">{challengerInfo.score}</strong> for their{' '}
                     <strong className="text-sky-300">{challengerInfo.role}</strong>.
                   </p>
                   <p className="text-xs text-zinc-300 mt-1">
-                    Enter your name below. Can you beat {challengerInfo.name}&apos;s score without using buzzwords?
+                    Enter your name below. Can you beat {challengerInfo.name}&apos;s sales score without using defensive clichés?
                   </p>
                 </div>
               )}
 
-              {/* AVATAR & BALLOON */}
               <div className="relative mx-auto flex flex-col md:flex-row items-center justify-center gap-3 md:gap-3.5 w-full max-w-xl mb-4">
                 <div className="order-2 md:order-1 flex flex-col items-center flex-shrink-0">
                   <div className={cn(
@@ -985,7 +964,7 @@ export default function Home() {
                     <img src={DICK_AVATAR} alt="Dick Headerson" className="h-full w-full object-cover" />
                   </div>
                   <div className="inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-xs font-semibold text-orange-400 mt-2">
-                    <UserX className="h-3.5 w-3.5" />
+                    <UserX className="h-3.5 w-3.5"/>
                     <span>VP of Roasting:</span>
                     <span style={{ fontFamily: "'Brush Script MT', 'Lucida Handwriting', cursive" }} className="text-base text-orange-300 ml-0.5">Dick Headerson</span>
                   </div>
@@ -1005,7 +984,7 @@ export default function Home() {
                     {!introPlayed ? (
                       "Welcome to the Hot Seat. Click below if you want to know what you're really getting into."
                     ) : challengerInfo ? (
-                      `"${challengerInfo.name} scored ${challengerInfo.score} for ${challengerInfo.role} and challenged you to beat them. Let's see if you have more substance!"`
+                      `"${challengerInfo.name} scored ${challengerInfo.score} for their ${challengerInfo.role} and challenged you to beat them. Let's see if you can price realistically!"`
                     ) : (
                       `"${BALLOON_ROASTS[balloonIndex]}"`
                     )}
@@ -1013,22 +992,21 @@ export default function Home() {
 
                   {!introPlayed ? (
                     <div className="flex items-center justify-center gap-2 mt-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs sm:text-sm uppercase tracking-wider py-2 px-5 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all mx-auto w-fit">
-                      <Volume2 className="h-4 w-4 animate-pulse" />
+                      <Volume2 className="h-4 w-4 animate-pulse"/>
                       <span>▶ Hear Dick&apos;s Challenge</span>
                     </div>
                   ) : (
                     <div className="flex items-center justify-center gap-1 mt-1.5 text-amber-400 font-black text-[11px] uppercase tracking-wider">
-                      <Volume2 className="h-3.5 w-3.5" />
+                      <Volume2 className="h-3.5 w-3.5"/>
                       <span>Tap for another roast</span>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* LOCKED STICKY HEADER (Pins directly to top as soon as it hits screen edge on both mobile and laptop) */}
               <div className="sticky top-0 z-50 w-full py-3 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800/90 shadow-2xl shadow-black/80 text-center transition-all">
                 <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl leading-none">
-                  RoastMyInterview<span className="text-orange-500">.me</span>
+                  RoastMySale<span className="text-orange-500">.me</span>
                 </h1>
                 <p className="text-[10px] sm:text-xs font-bold text-amber-500 uppercase tracking-widest mt-1">Part of the RoastMy.me Network</p>
               </div>
@@ -1040,20 +1018,18 @@ export default function Home() {
                     Dick Headerson
                   </span>
                   <span className="text-zinc-600 px-1">•</span>
-                  <span className="text-zinc-300 font-medium">Tough love. Zero buzzwords. Real feedback.</span>
+                  <span className="text-zinc-300 font-medium">Tough love. Transparent pricing. Real buyers.</span>
                 </p>
 
-                {/* SHORT & SWEET SALES PITCH: FOR PLAY & FOR REAL */}
                 <div className="w-full rounded-3xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 backdrop-blur text-left shadow-xl">
                   <div className="flex items-center justify-between mb-3 border-b border-zinc-800/80 pb-2">
                     <span className="text-[11px] font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5" /> Why Use RoastMyInterview?
+                      <Sparkles className="h-3.5 w-3.5"/> Why Use RoastMySale?
                     </span>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Short &amp; Sweet</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {/* 1. For Play */}
                     <div className="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-3.5 flex flex-col justify-between hover:border-orange-500/40 transition">
                       <div>
                         <div className="flex items-center gap-1.5 mb-1.5">
@@ -1061,39 +1037,37 @@ export default function Home() {
                           <h4 className="text-xs sm:text-sm font-black uppercase tracking-wide text-orange-400">1. For Play (Pure Fun)</h4>
                         </div>
                         <ul className="text-xs text-zinc-300 space-y-1.5 leading-relaxed">
-                          <li>• <strong>Roast a buddy&apos;s pitch:</strong> Drop in that friend who calls themselves a &quot;visionary leader&quot; and watch them get humbled.</li>
-                          <li>• <strong>Group chat receipts:</strong> Screenshot savage pink slips and ego-checking grades (D-) to share with colleagues.</li>
+                          <li>• <strong>Roast a friend&apos;s listing:</strong> Drop in that friend asking $2,000 for a broken iPhone and watch them get humbled.</li>
+                          <li>• <strong>Group chat receipts:</strong> Screenshot savage pink slips and ego-checking grades (D-) to share with friends.</li>
                         </ul>
                       </div>
                       <div className="mt-3 pt-2 border-t border-orange-500/10 text-[10px] font-bold text-orange-300 uppercase tracking-wider">
-                        &rarr; Hilarious watercooler entertainment
+                        &rarr; Hilarious marketplace comedy
                       </div>
                     </div>
 
-                    {/* 2. For Real */}
                     <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-3.5 flex flex-col justify-between hover:border-emerald-500/40 transition">
                       <div>
                         <div className="flex items-center gap-1.5 mb-1.5">
-                          <span className="text-base">💼</span>
-                          <h4 className="text-xs sm:text-sm font-black uppercase tracking-wide text-emerald-400">2. For Real (Career Medicine)</h4>
+                          <span className="text-base">🏷️</span>
+                          <h4 className="text-xs sm:text-sm font-black uppercase tracking-wide text-emerald-400">2. For Real (Sales Medicine)</h4>
                         </div>
                         <ul className="text-xs text-zinc-300 space-y-1.5 leading-relaxed">
-                          <li>• <strong>The brutal truth:</strong> Recruiters smile, say &quot;great job,&quot; and silently ghost you. Dick tells you what they actually think.</li>
-                          <li>• <strong>Kill interview killers:</strong> Eradicate fluffy filler words (&quot;synergy&quot;, &quot;bandwidth&quot;) and build unflappable executive composure.</li>
+                          <li>• <strong>The brutal truth:</strong> Real buyers silently scroll past and lowball. Dick tells you what they actually think.</li>
+                          <li>• <strong>Kill conversion killers:</strong> Eradicate defensive clichés (&quot;no lowballers&quot;) and build an offer that actually sells.</li>
                         </ul>
                       </div>
                       <div className="mt-3 pt-2 border-t border-emerald-500/10 text-[10px] font-bold text-emerald-300 uppercase tracking-wider">
-                        &rarr; The fastest cure to interview ghosting
+                        &rarr; The fastest shortcut to an accepted offer
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* HOT SEAT CARD WITH VIRAL EXPANSIONS */}
                 <div className="w-full rounded-3xl border-2 border-orange-500/70 bg-gradient-to-b from-zinc-900 via-zinc-900 to-zinc-950 p-4 sm:p-7 shadow-2xl shadow-orange-500/20 text-left relative overflow-hidden backdrop-blur">
                   <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
                     <div className="flex items-center gap-1.5 sm:gap-2">
-                      <Flame className="h-5 w-5 text-orange-500 animate-pulse" />
+                      <Flame className="h-5 w-5 text-orange-500 animate-pulse"/>
                       <span className="text-xs sm:text-base font-black tracking-wider uppercase text-white">
                         {challengerInfo ? `Beat ${challengerInfo.name}` : 'Step Up to the Hot Seat'}
                       </span>
@@ -1106,14 +1080,14 @@ export default function Home() {
                   <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                     <div>
                       <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-orange-400 flex items-center gap-1.5">
-                        <UserX className="h-4 w-4" /> 1. Candidate Name
+                        <UserX className="h-4 w-4"/> 1. Seller Name / Handle
                       </label>
                       <input
                         ref={nameInputRef}
                         type="text"
                         value={userName}
                         onChange={(e) => setUserName(e.target.value)}
-                        placeholder="e.g. Andy Smith"
+                        placeholder="e.g. Mike R. or @reseller_pro"
                         className="w-full rounded-xl border-2 border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm sm:text-base font-bold text-white placeholder-zinc-500 outline-none transition-all focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20"
                         autoFocus
                       />
@@ -1121,20 +1095,19 @@ export default function Home() {
 
                     <div>
                       <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-orange-400 flex items-center gap-1.5">
-                        <Briefcase className="h-4 w-4" /> 2. Target Job / Industry
+                        <Tag className="h-4 w-4"/> 2. Item or Service Being Sold
                       </label>
                       <input
                         type="text"
                         value={jobTitle}
                         onChange={(e) => setJobTitle(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleStart()}
-                        placeholder="e.g. Senior Product Manager"
+                        placeholder="e.g. 2015 Toyota Tacoma, Consulting Retainer, Sofa"
                         className="w-full rounded-xl border-2 border-zinc-700 bg-zinc-950 px-3.5 py-3 text-sm sm:text-base font-bold text-white placeholder-zinc-500 outline-none transition-all focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20"
                       />
                     </div>
                   </div>
 
-                  {/* VIRAL BONUS EXPANSION */}
                   <div className="mt-3 border-t border-zinc-800/80 pt-3">
                     <button
                       type="button"
@@ -1142,35 +1115,35 @@ export default function Home() {
                       className="flex items-center justify-between w-full text-xs font-bold text-amber-400/90 hover:text-amber-300 transition py-1"
                     >
                       <span className="flex items-center gap-1.5">
-                        <Zap className="h-3.5 w-3.5 text-amber-400" />
-                        <span>+ Add LinkedIn Headline Roast &amp; Company Wars (Optional)</span>
+                        <Zap className="h-3.5 w-3.5 text-amber-400"/>
+                        <span>+ Add Asking Price &amp; Listing Copy (Optional)</span>
                       </span>
-                      {showViralOptions ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                      {showViralOptions ? <ChevronUp className="h-4 w-4"/> : <ChevronDown className="h-4 w-4"/>}
                     </button>
 
                     {showViralOptions && (
                       <div className="mt-3 space-y-3 animate-in fade-in">
                         <div>
                           <label className="mb-1 block text-[11px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                            <Building2 className="h-3.5 w-3.5 text-orange-400" /> Current Company / Employer
+                            <Building2 className="h-3.5 w-3.5 text-orange-400"/> Marketplace / Channel
                           </label>
                           <input
                             type="text"
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
-                            placeholder="e.g. McKinsey, Google, Seed Startup"
+                            placeholder="e.g. FB Marketplace, Craigslist, Website, Upwork"
                             className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-semibold text-white placeholder-zinc-600 outline-none focus:border-orange-500"
                           />
                         </div>
                         <div>
                           <label className="mb-1 block text-[11px] font-black uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                            <Sparkles className="h-3.5 w-3.5 text-amber-400" /> LinkedIn Headline / Bio (Dick will roast it first)
+                            <DollarSign className="h-3.5 w-3.5 text-amber-400"/> Current Asking Price &amp; Listing Text (Dick will roast it first)
                           </label>
                           <input
                             type="text"
                             value={linkedinBio}
                             onChange={(e) => setLinkedinBio(e.target.value)}
-                            placeholder="e.g. Visionary Growth Hacker &amp; Cross-Functional Catalyst"
+                            placeholder='e.g. "$12,000 firm. No lowballers I know what I got."'
                             className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-xs font-semibold text-white placeholder-zinc-600 outline-none focus:border-orange-500"
                           />
                         </div>
@@ -1190,32 +1163,31 @@ export default function Home() {
                     >
                       {challengerInfo ? (
                         <>
-                          <Swords className="h-5 w-5 text-white" />
+                          <Swords className="h-5 w-5 text-white"/>
                           <span>Accept Challenge (Beat {challengerInfo.score}) &rarr;</span>
                         </>
                       ) : isVipMode ? (
                         <>
-                          <Crown className="h-5 w-5 text-black" />
+                          <Crown className="h-5 w-5 text-black"/>
                           <span>Start 13 Questions + Checkpoints &rarr;</span>
                         </>
                       ) : (
                         <>
-                          <Flame className="h-5 w-5" />
-                          <span>Start Free 3-Question Interview Roast &rarr;</span>
+                          <Flame className="h-5 w-5"/>
+                          <span>Start Free 3-Question Sales Roast &rarr;</span>
                         </>
                       )}
                     </button>
 
                     {!isVipMode && (
                       <div className="mt-3 flex items-center justify-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-500/80">
-                        <CheckCircle2 className="h-3.5 w-3.5" />
+                        <CheckCircle2 className="h-3.5 w-3.5"/>
                         <span>No credit card required</span>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* LEADERBOARDS & COMPANY WARS */}
                 <div className="w-full pt-2 text-left">
                   <div className="flex items-center gap-3 mb-3 border-b border-zinc-800 pb-2 overflow-x-auto">
                     <button
@@ -1226,7 +1198,7 @@ export default function Home() {
                         activeTab === 'fame' ? 'text-emerald-400 border-b-2 border-emerald-500' : 'text-zinc-500 hover:text-zinc-300'
                       )}
                     >
-                      <Trophy className="h-3.5 w-3.5" /> Hall of Fame (85+)
+                      <Trophy className="h-3.5 w-3.5"/> Hall of Fame (85+)
                     </button>
                     <button
                       type="button"
@@ -1236,7 +1208,7 @@ export default function Home() {
                         activeTab === 'shame' ? 'text-orange-400 border-b-2 border-orange-500' : 'text-zinc-500 hover:text-zinc-300'
                       )}
                     >
-                      <FlameKindling className="h-3.5 w-3.5" /> Wall of Shame (0–30)
+                      <FlameKindling className="h-3.5 w-3.5"/> Wall of Shame (0–30)
                     </button>
                     <button
                       type="button"
@@ -1246,13 +1218,13 @@ export default function Home() {
                         activeTab === 'companies' ? 'text-amber-400 border-b-2 border-amber-500' : 'text-zinc-500 hover:text-zinc-300'
                       )}
                     >
-                      <Building2 className="h-3.5 w-3.5" /> 🏢 Company Wars
+                      <Tag className="h-3.5 w-3.5"/> 🏷️ Marketplace Wars
                     </button>
                   </div>
 
                   <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
                     {activeTab === 'companies' ? (
-                      COMPANY_WARS.map((item, idx) => (
+                      MARKET_WARS.map((item, idx) => (
                         <div key={idx} className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-3 flex flex-col gap-1 text-xs">
                           <div className="flex items-center justify-between text-zinc-400">
                             <span className="font-semibold text-zinc-200">{item.name} <span className="text-[10px] text-zinc-500">({item.players})</span></span>
@@ -1268,7 +1240,7 @@ export default function Home() {
                         <div key={idx} className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-3 flex flex-col gap-1 text-xs">
                           <div className="flex items-center justify-between text-zinc-400">
                             <span className="font-semibold text-zinc-200">
-                              {item.name} <span className="font-normal text-zinc-500">for {item.role}</span>
+                              {item.name} <span className="font-normal text-zinc-500">({item.role})</span>
                             </span>
                             <span className={cn(
                               'font-bold px-2 py-0.5 rounded border text-[11px]',
@@ -1285,7 +1257,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* PASSCODE ENTRY */}
                 <div className="pt-1">
                   {!showVipModal ? (
                     <button
@@ -1293,14 +1264,14 @@ export default function Home() {
                       onClick={() => setShowVipModal(true)}
                       className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-amber-400 transition"
                     >
-                      <KeyRound className="h-3.5 w-3.5" />
+                      <KeyRound className="h-3.5 w-3.5"/>
                       <span>{isVipMode ? 'VIP Active — Change passcode' : 'Have an access code?'}</span>
                     </button>
                   ) : (
                     <form onSubmit={handleVerifyVipCode} className="mx-auto w-full max-w-sm rounded-xl border border-zinc-800 bg-zinc-900/80 p-3 space-y-2 text-left animate-in fade-in">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-semibold text-zinc-300 flex items-center gap-1">
-                          <KeyRound className="h-3.5 w-3.5 text-amber-400" /> Enter Passcode:
+                          <KeyRound className="h-3.5 w-3.5 text-amber-400"/> Enter Passcode:
                         </span>
                         <button type="button" onClick={() => { setShowVipModal(false); setVipError(''); }} className="text-[11px] text-zinc-500 hover:text-zinc-300">
                           Cancel
@@ -1331,21 +1302,20 @@ export default function Home() {
                 <footer className="w-full py-8 border-t border-zinc-800/80 mt-10 text-center text-xs text-zinc-500 space-y-3">
                   <div className="mb-2">
                     <a href="https://roastmy.me" className="inline-flex items-center gap-1 font-bold text-amber-500 hover:text-amber-400 transition-colors uppercase tracking-widest text-[10px]">
-                      <Flame className="h-3.5 w-3.5" /> Part of RoastMy.me
+                      <Flame className="h-3.5 w-3.5"/> Part of RoastMy.me
                     </a>
                   </div>
                   <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-                    <span>© 2026 RoastMyInterview.me</span>
+                    <span>© 2026 RoastMySale.me</span>
                     <a href="/terms" className="hover:text-zinc-300 transition">Terms of Service</a>
                     <a href="/privacy" className="hover:text-zinc-300 transition">Privacy Policy</a>
-                    <a href="mailto:support@roastmyinterview.me" className="hover:text-zinc-300 transition">Contact</a>
+                    <a href="mailto:support@roastmysale.me" className="hover:text-zinc-300 transition">Contact</a>
                   </div>
                 </footer>
               </div>
             </div>
           </div>
         ) : (
-          /* ACTIVE AUDIT / ROAST FLOW */
           <div className="flex h-screen max-w-full flex-col bg-zinc-950 overflow-x-hidden">
             <header className={cn(
               'flex items-center justify-between border-b px-3 py-2.5 sm:px-6 sm:py-3.5 transition-colors max-w-full overflow-hidden flex-shrink-0',
@@ -1353,7 +1323,7 @@ export default function Home() {
             )}>
               <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 mr-2">
                 <a href="https://roastmy.me" title="Back to RoastMy.me Hub" className="mr-1 sm:mr-2 flex items-center justify-center text-zinc-500 hover:text-amber-500 transition-colors">
-                  <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7" />
+                  <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7"/>
                 </a>
                 <div className={cn(
                   'flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl shadow-lg overflow-hidden border border-zinc-700 flex-shrink-0',
@@ -1366,7 +1336,7 @@ export default function Home() {
                     Dick Headerson
                   </h1>
                   <p className={cn('text-[10px] sm:text-xs font-medium uppercase tracking-wider mt-0.5 truncate', autoFailed ? 'text-red-400' : 'text-zinc-400')}>
-                    {isVipMode ? 'Unlucky 13 Gauntlet' : 'Senior Hiring Manager'}
+                    {isVipMode ? 'Unlucky 13 Gauntlet' : 'Chief Reality Officer'}
                   </p>
                 </div>
               </div>
@@ -1379,14 +1349,14 @@ export default function Home() {
                     voiceEnabled ? "border-emerald-500/50 bg-emerald-500/15 text-emerald-300" : "border-zinc-700 bg-zinc-800/80 text-zinc-400 hover:text-white"
                   )}
                 >
-                  {voiceEnabled ? <Volume2 className="h-4 w-4 text-emerald-400" /> : <VolumeX className="h-4 w-4 text-zinc-500" />}
+                  {voiceEnabled ? <Volume2 className="h-4 w-4 text-emerald-400"/> : <VolumeX className="h-4 w-4 text-zinc-500"/>}
                   <span className="hidden md:inline">{voiceEnabled ? 'Voice On' : 'Voice Off'}</span>
                 </button>
                 <button
                   onClick={handleNativeShare}
                   className="flex items-center gap-1 rounded-lg border border-orange-500/40 bg-orange-500/10 px-2 py-1.5 sm:px-3 sm:py-2 text-xs font-bold text-orange-300 transition-all hover:bg-orange-500/20"
                 >
-                  <Swords className="h-4 w-4 text-orange-400" />
+                  <Swords className="h-4 w-4 text-orange-400"/>
                   <span className="hidden sm:inline">Challenge</span>
                 </button>
               </div>
@@ -1401,7 +1371,7 @@ export default function Home() {
                   const isLastMessage = index === messages.length - 1;
 
                   const userDisplayText = isUser && (text.includes('You are Dick Headerson') || text.startsWith('My name is'))
-                    ? `Hi Dick, I'm ${userName.trim()}${companyName ? ` from ${companyName.trim()}` : ''} and I'm ready for the ${jobTitle.trim()} interview.`
+                    ? `Hi Dick, I'm ${userName.trim()}${companyName ? ` (${companyName.trim()})` : ''} and I'm ready to have my sale of ${jobTitle.trim()} audited.`
                     : text;
 
                   if (!isUser && isInterviewOver && isLastMessage && !isStreaming && parsedScorecard) {
@@ -1420,7 +1390,6 @@ export default function Home() {
                           </div>
                         )}
 
-                        {/* SCORECARD CARDS */}
                         <div className="w-full rounded-2xl border border-zinc-800 bg-zinc-900/90 p-3.5 sm:p-5 shadow-2xl backdrop-blur overflow-hidden">
                           <div className="grid grid-cols-4 gap-1 sm:gap-2 border-b border-zinc-800 pb-3 text-center">
                             {[
@@ -1452,7 +1421,7 @@ export default function Home() {
                                 <span className="text-xs sm:text-sm font-black text-orange-400">Score: {parsedScorecard.finalScore}</span>
                               </div>
                               <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                                <span>💀</span> The Executive Autopsy
+                                <span>💀</span> The Sales Autopsy
                               </h4>
                               <div className="text-sm sm:text-base leading-relaxed text-zinc-300 prose prose-invert prose-sm sm:prose-base max-w-none break-words">
                                 <ReactMarkdown>{parsedScorecard.autopsy || parsedScorecard.raw}</ReactMarkdown>
@@ -1462,7 +1431,7 @@ export default function Home() {
                                   onClick={() => setScorecardStep(1)}
                                   className="flex items-center gap-1.5 rounded-xl bg-orange-500 px-4 py-2 text-xs sm:text-sm font-bold text-white hover:bg-orange-600 transition"
                                 >
-                                  Next: What Dick Heard <ChevronRight className="h-4 w-4" />
+                                  Next: What Dick Heard <ChevronRight className="h-4 w-4"/>
                                 </button>
                               </div>
                             </div>
@@ -1471,7 +1440,7 @@ export default function Home() {
                           {scorecardStep === 1 && (
                             <div className="mt-4 space-y-3 animate-in fade-in duration-300">
                               <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                                <span>🗣️</span> What You Said vs. What Dick Heard
+                                <span>🗣️</span> What Your Listing Said vs. What Buyers Saw
                               </h4>
                               <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 sm:p-4 text-xs sm:text-sm text-zinc-300 leading-relaxed prose prose-invert prose-sm max-w-none break-words">
                                 <ReactMarkdown>{parsedScorecard.translation || 'No translation available.'}</ReactMarkdown>
@@ -1484,7 +1453,7 @@ export default function Home() {
                                   onClick={() => setScorecardStep(2)}
                                   className="flex items-center gap-1.5 rounded-xl bg-orange-500 px-4 py-2 text-xs sm:text-sm font-bold text-white hover:bg-orange-600 transition"
                                 >
-                                  Next: The Fix <ChevronRight className="h-4 w-4" />
+                                  Next: The Fix <ChevronRight className="h-4 w-4"/>
                                 </button>
                               </div>
                             </div>
@@ -1493,7 +1462,7 @@ export default function Home() {
                           {scorecardStep === 2 && (
                             <div className="mt-4 space-y-3 animate-in fade-in duration-300">
                               <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                                <span>🚩</span> Red Flags &amp; <span>💡</span> The Script Doctor
+                                <span>🚩</span> Red Flags &amp; <span>💡</span> The Price Doctor
                               </h4>
                               {parsedScorecard.redFlags && (
                                 <div className="rounded-xl border border-red-950/50 bg-red-950/20 p-3 sm:p-4 text-xs sm:text-sm text-zinc-300 prose prose-invert prose-sm max-w-none break-words">
@@ -1501,7 +1470,7 @@ export default function Home() {
                                 </div>
                               )}
                               <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3 sm:p-4 text-xs sm:text-sm text-zinc-300 prose prose-invert prose-sm max-w-none break-words">
-                                <ReactMarkdown>{parsedScorecard.scriptDoctor || 'Focus on concrete metrics and simple language.'}</ReactMarkdown>
+                                <ReactMarkdown>{parsedScorecard.scriptDoctor || 'Focus on concrete market comps, clear condition proof, and zero defensive posture.'}</ReactMarkdown>
                               </div>
                               <div className="pt-2 flex items-center justify-between">
                                 <button onClick={() => setScorecardStep(1)} className="text-xs sm:text-sm text-zinc-500 hover:text-zinc-300">
@@ -1511,7 +1480,7 @@ export default function Home() {
                                   onClick={() => setScorecardStep(3)}
                                   className="flex items-center gap-1.5 rounded-xl bg-orange-500 px-4 py-2 text-xs sm:text-sm font-bold text-white hover:bg-orange-600 transition"
                                 >
-                                  View Scorecard Badge <ChevronRight className="h-4 w-4" />
+                                  View Scorecard Badge <ChevronRight className="h-4 w-4"/>
                                 </button>
                               </div>
                             </div>
@@ -1519,7 +1488,6 @@ export default function Home() {
 
                           {scorecardStep === 3 && (
                             <div className="mt-4 flex flex-col items-center gap-4 animate-in fade-in duration-300 w-full overflow-hidden">
-                              {/* THREE-WAY FORMAT TOGGLE */}
                               <div className="flex flex-wrap items-center justify-center gap-1.5 bg-zinc-800/80 p-1.5 rounded-xl text-xs font-bold w-full max-w-sm">
                                 <button
                                   type="button"
@@ -1533,7 +1501,7 @@ export default function Home() {
                                   onClick={() => setBadgeFormat('story')}
                                   className={cn("flex items-center gap-1 px-2.5 py-1.5 rounded-lg transition text-[11px]", badgeFormat === 'story' ? "bg-red-600 text-white" : "text-zinc-400 hover:text-white")}
                                 >
-                                  <Smartphone className="h-3 w-3" />
+                                  <Smartphone className="h-3 w-3"/>
                                   <span>9:16 Pink Slip</span>
                                 </button>
                                 <button
@@ -1545,7 +1513,6 @@ export default function Home() {
                                 </button>
                               </div>
 
-                              {/* CERTIFICATE/MEME/STORY RENDER CONTAINER */}
                               <div
                                 ref={certificateRef}
                                 className={cn(
@@ -1557,31 +1524,29 @@ export default function Home() {
                                       : "w-full max-w-[340px] sm:max-w-sm p-4 sm:p-5 border-orange-500/30 bg-zinc-950 shadow-2xl shadow-orange-950/40"
                                 )}
                               >
-                                {/* HR PINK SLIP (9:16 STORY) */}
                                 {badgeFormat === 'story' && (
                                   <>
                                     <div className="flex items-center justify-between border-b border-red-500/30 pb-2">
                                       <div className="flex items-center gap-1.5">
-                                        <FileWarning className="h-4 w-4 text-red-500 animate-pulse" />
-                                        <span className="text-[10px] font-black uppercase tracking-wider text-red-400">Official HR Citation</span>
+                                        <FileWarning className="h-4 w-4 text-red-500 animate-pulse"/>
+                                        <span className="text-[10px] font-black uppercase tracking-wider text-red-400">Market Citation</span>
                                       </div>
                                       <span className="text-[9px] font-mono text-zinc-500">{new Date().toLocaleDateString()}</span>
                                     </div>
 
-                                    {/* RED TERMINATED WATERMARK STAMP */}
                                     <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                                       <div className="border-4 border-red-500/40 text-red-500/40 px-4 py-1 text-3xl sm:text-4xl font-black uppercase tracking-widest -rotate-24 select-none rounded-xl">
-                                        TERMINATED
+                                        CANCELLED
                                       </div>
                                     </div>
 
                                     <div className="relative z-10 text-center my-auto">
-                                      <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Notice of Rejection Issued To</p>
+                                      <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Notice of Overpriced Delusion</p>
                                       <h3 className="text-xl font-black text-white mt-0.5">{userName}</h3>
                                       <p className="text-xs text-red-400 font-semibold">{jobTitle} {companyName ? `• ${companyName}` : ''}</p>
 
                                       <div className="mt-4 rounded-xl border border-red-500/30 bg-red-950/40 p-3 text-center">
-                                        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Score &amp; Offense</p>
+                                        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Score &amp; Verdict</p>
                                         <p className="text-4xl font-black text-red-400 leading-tight mt-0.5">{parsedScorecard.finalScore}</p>
                                         <p className="text-[10px] font-black uppercase tracking-wider text-red-300 mt-1">
                                           {parsedScorecard.decision}
@@ -1591,57 +1556,55 @@ export default function Home() {
                                       <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-900/80 p-2 text-left">
                                         <p className="text-[8px] font-bold uppercase text-zinc-500">Dick&apos;s Autopsy Note:</p>
                                         <p className="text-[10.5px] italic text-zinc-300 mt-0.5 line-clamp-3">
-                                          &quot;{parsedScorecard.introRoast || 'Candidate collapsed under simple pressure testing and deployed illegal corporate jargon.'}&quot;
+                                          &quot;{parsedScorecard.introRoast || 'Seller deployed illegal pricing delusion and defensive clichés.'}&quot;
                                         </p>
                                       </div>
                                     </div>
 
                                     <div className="relative z-10 border-t border-zinc-800 pt-2 flex items-center justify-between text-[9px] text-zinc-500">
-                                      <span>roastmyinterview.me</span>
-                                      <span className="font-mono text-red-400 font-bold">AUDIT CITATION #RMI-{Math.floor(Math.random() * 90000 + 10000)}</span>
+                                      <span>roastmysale.me</span>
+                                      <span className="font-mono text-red-400 font-bold">AUDIT CITATION #RMS-{Math.floor(Math.random() * 90000 + 10000)}</span>
                                     </div>
                                   </>
                                 )}
 
-                                {/* 1:1 SQUARE MEME CARD (THE RECEIPTS) */}
                                 {badgeFormat === 'receipts' && (
                                   <>
                                     <div className="flex items-center justify-between border-b border-zinc-800 pb-1.5">
-                                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-400">The Interview Receipts</span>
+                                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-400">The Sales Receipts</span>
                                       <span className="text-[10px] font-black text-orange-400">Score: {parsedScorecard.finalScore}</span>
                                     </div>
 
                                     <div className="my-auto space-y-2">
                                       <div className="rounded-lg border border-zinc-800 bg-zinc-900/80 p-2.5 text-xs">
-                                        <p className="text-[9px] font-bold uppercase text-zinc-400">What You Thought You Said:</p>
+                                        <p className="text-[9px] font-bold uppercase text-zinc-400">What You Thought You Offered:</p>
                                         <p className="text-xs text-white font-medium mt-0.5 line-clamp-2">
-                                          {userName} applying for {jobTitle}: &quot;I drive strategic value and synergize cross-functional stakeholders.&quot;
+                                          {userName} selling {jobTitle}: &quot;Great deal, priced to move fast, no lowballers.&quot;
                                         </p>
                                       </div>
 
                                       <div className="rounded-lg border border-orange-500/30 bg-orange-950/30 p-2.5 text-xs">
-                                        <p className="text-[9px] font-bold uppercase text-orange-400">What Dick Actually Heard:</p>
+                                        <p className="text-[9px] font-bold uppercase text-orange-400">What Buyers Actually Saw:</p>
                                         <p className="text-xs text-zinc-200 italic mt-0.5 line-clamp-3">
-                                          &quot;{parsedScorecard.translation ? parsedScorecard.translation.slice(0, 140) + '...' : 'I talk a lot of consultant nonsense because I don’t have actual numbers to back up my resume.'}&quot;
+                                          &quot;{parsedScorecard.translation ? parsedScorecard.translation.slice(0, 140) + '...' : 'An overpriced listing with defensive warnings, forcing buyers to scroll right past.'}&quot;
                                         </p>
                                       </div>
                                     </div>
 
                                     <div className="border-t border-zinc-800 pt-1.5 flex items-center justify-between text-[9px] text-zinc-500">
-                                      <span className="font-bold text-white">roastmyinterview.me</span>
+                                      <span className="font-bold text-white">roastmysale.me</span>
                                       <span className="text-orange-400 font-semibold">{parsedScorecard.decision}</span>
                                     </div>
                                   </>
                                 )}
 
-                                {/* CLASSIC SCORECARD BADGE */}
                                 {badgeFormat === 'badge' && (
                                   <>
                                     <div className="flex items-center justify-between border-b border-zinc-800 pb-2.5">
                                       <div className="flex items-center gap-1.5">
-                                        <Flame className="h-4 w-4 text-orange-500" />
+                                        <Flame className="h-4 w-4 text-orange-500"/>
                                         <span className="text-[11px] font-bold tracking-tight text-white">
-                                          RoastMyInterview<span className="text-orange-500">.me</span>
+                                          RoastMySale<span className="text-orange-500">.me</span>
                                         </span>
                                       </div>
                                       <span className="text-[10px] font-mono text-zinc-500">{new Date().toLocaleDateString()}</span>
@@ -1649,7 +1612,7 @@ export default function Home() {
 
                                     <div className="mt-3.5 flex items-start justify-between gap-2">
                                       <div>
-                                        <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Candidate</p>
+                                        <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">Listing / Offer</p>
                                         <h4 className="text-base font-extrabold text-white leading-tight">{userName}</h4>
                                         <p className="text-xs text-orange-400/90 font-medium">{jobTitle} {companyName ? `• ${companyName}` : ''}</p>
                                       </div>
@@ -1692,21 +1655,20 @@ export default function Home() {
                                 )}
                               </div>
 
-                              {/* SHARE BUTTONS SUITE */}
                               <div className="flex flex-col gap-2.5 w-full max-w-sm">
                                 <button
                                   onClick={() => handleWallShare('slack')}
                                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-3 text-xs sm:text-sm font-black text-white shadow-lg shadow-emerald-600/25 hover:from-emerald-500 hover:to-teal-500 transition-all active:scale-[0.98]"
                                 >
-                                  <MessageSquare className="h-4 w-4" />
-                                  <span>Drop into Coworker Slack / Teams</span>
+                                  <MessageSquare className="h-4 w-4"/>
+                                  <span>Drop into Friends Slack / Group Chat</span>
                                 </button>
 
                                 <button
                                   onClick={() => handleWallShare('linkedin')}
                                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 px-4 py-3 text-xs sm:text-sm font-black text-white shadow-lg shadow-sky-600/25 hover:from-sky-500 hover:to-blue-500 transition-all active:scale-[0.98]"
                                 >
-                                  <Linkedin className="h-4 w-4 fill-white" />
+                                  <Linkedin className="h-4 w-4 fill-white"/>
                                   <span>Post Humble-Roast to LinkedIn</span>
                                 </button>
 
@@ -1715,37 +1677,37 @@ export default function Home() {
                                     onClick={copyBadgeToClipboard}
                                     className="flex items-center justify-center gap-1 rounded-xl bg-orange-500 py-2 sm:py-2.5 text-xs font-bold text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 transition"
                                   >
-                                    <Copy className="h-3.5 w-3.5" /> <span className="truncate">Badge</span>
+                                    <Copy className="h-3.5 w-3.5"/> <span className="truncate">Badge</span>
                                   </button>
                                   <button
                                     onClick={downloadCertificate}
                                     className="flex items-center justify-center gap-1 rounded-xl border border-zinc-700 bg-zinc-800 py-2 sm:py-2.5 text-xs font-bold text-zinc-200 hover:bg-zinc-700 transition"
                                   >
-                                    <Download className="h-3.5 w-3.5" /> <span className="truncate">Save File</span>
+                                    <Download className="h-3.5 w-3.5"/> <span className="truncate">Save File</span>
                                   </button>
                                   <button
                                     onClick={handleNativeShare}
                                     className="flex items-center justify-center gap-1 rounded-xl border border-amber-500/40 bg-amber-500/10 py-2 sm:py-2.5 text-xs font-bold text-amber-300 hover:bg-amber-500/20 transition"
                                   >
-                                    <Swords className="h-3.5 w-3.5" /> <span className="truncate">Challenge</span>
+                                    <Swords className="h-3.5 w-3.5"/> <span className="truncate">Challenge</span>
                                   </button>
                                 </div>
 
                                 <div className="flex items-center justify-center gap-2 pt-0.5">
                                   <button onClick={() => handleWallShare('whatsapp')} title="WhatsApp" className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-emerald-400 transition">
-                                    <MessageCircle className="h-4 w-4" />
+                                    <MessageCircle className="h-4 w-4"/>
                                   </button>
-                                  <button onClick={() => handleWallShare('facebook')} title="Tag a Coworker on Facebook" className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-blue-400 transition">
-                                    <Facebook className="h-4 w-4" />
+                                  <button onClick={() => handleWallShare('facebook')} title="Tag a Friend on Facebook" className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-blue-400 transition">
+                                    <Facebook className="h-4 w-4"/>
                                   </button>
                                   <button onClick={() => handleWallShare('instagram')} title="Instagram Story Prompt &amp; Caption" className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-pink-400 transition">
-                                    <Instagram className="h-4 w-4" />
+                                    <Instagram className="h-4 w-4"/>
                                   </button>
                                   <button onClick={() => handleWallShare('twitter')} title="X (Twitter)" className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition">
-                                    <Twitter className="h-4 w-4" />
+                                    <Twitter className="h-4 w-4"/>
                                   </button>
                                   <button onClick={() => handleWallShare('linkedin')} title="LinkedIn" className="p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-sky-400 transition">
-                                    <Linkedin className="h-4 w-4" />
+                                    <Linkedin className="h-4 w-4"/>
                                   </button>
                                 </div>
 
@@ -1775,7 +1737,7 @@ export default function Home() {
                             title="Replay audio"
                             className="flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900/80 px-2 py-0.5 text-[10px] font-semibold text-zinc-400 hover:border-orange-500/40 hover:text-orange-300 transition-all active:scale-95"
                           >
-                            <Volume2 className="h-3 w-3 text-orange-400" />
+                            <Volume2 className="h-3 w-3 text-orange-400"/>
                             <span>Replay</span>
                           </button>
                         </div>
@@ -1846,7 +1808,7 @@ export default function Home() {
                       rows={1}
                       disabled={isStreaming}
                       onKeyDown={handleKeyDown}
-                      placeholder={isStreaming ? 'Dick is typing...' : 'Defend your resume or type your answer...'}
+                      placeholder={isStreaming ? 'Dick is typing...' : 'Defend your asking price or describe your offer...'}
                       className="max-h-28 min-h-[40px] sm:min-h-[44px] flex-1 min-w-0 resize-none self-center bg-transparent py-2 sm:py-2.5 text-sm sm:text-base text-white placeholder-zinc-500 outline-none disabled:opacity-50"
                     />
                     <button
@@ -1857,11 +1819,11 @@ export default function Home() {
                         isVipMode ? "bg-gradient-to-br from-amber-500 to-orange-600 text-black" : "bg-gradient-to-br from-orange-500 to-red-600 text-white"
                       )}
                     >
-                      <Flame className="h-5 w-5" />
+                      <Flame className="h-5 w-5"/>
                     </button>
                   </form>
                   <p className="mt-1.5 text-center text-[10px] text-zinc-600">
-                    Press Enter to send, Shift+Enter for new line. Speak with real numbers and metrics.
+                    Press Enter to send, Shift+Enter for new line. Justify your price with real value and condition.
                   </p>
                 </div>
               </div>
